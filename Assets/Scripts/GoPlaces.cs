@@ -17,7 +17,7 @@ public class GoPlaces : MonoBehaviour
         _places = new Transform[_placesPoints.childCount];
 
         for (int i = 0; i < _placesPoints.childCount; i++)
-            _places[i] = _placesPoints.GetChild(i).GetComponent<Transform>();
+            _places[i] = _placesPoints.GetChild(i).transform;
     }
 
     private void Update()

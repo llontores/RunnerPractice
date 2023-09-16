@@ -6,7 +6,7 @@ public class HealMover : MonoBehaviour
 {
     [SerializeField] private float _speed;
 
-    void Update()
+    private void Update()
     {
         transform.Translate(Vector3.left *_speed * Time.deltaTime);
     }

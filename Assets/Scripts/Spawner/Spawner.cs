@@ -16,20 +16,27 @@ public class Spawner : ObjectPool
     private void Start()
     {
         Initialize(_enemy);
+        StartCoroutine(SpawnEnemies());
     }
 
-    private void Update()
+    private void SetEnemy(GameObject enemy, Vector3 spawnpoint)
     {
-        _elapsedTime += Time.deltaTime;
-        
-        if(_elapsedTime >= _delayInSeconds)
+        enemy.SetActive(true);
+        enemy.transform.position = spawnpoint;
+    }
+
+    private IEnumerator SpawnEnemies()
+    {
+        WaitForSeconds delay = new WaitForSeconds(_delayInSeconds);
+
+        while (true)
         {
             int randomChoice = Random.Range(0, _maxRandom);
             int spawnPointIndex = Random.Range(0, _spawnPoints.Length);
 
             if (_numbersToHeal.Contains(randomChoice) == true)
             {
-                Instantiate(_healPrefab, _spawnPoints[spawnPointIndex].position , Quaternion.identity);
+                Instantiate(_healPrefab, _spawnPoints[spawnPointIndex].position, Quaternion.identity);
             }
             else if (_numbersToHeal.Contains(randomChoice) == false)
             {
@@ -38,13 +45,9 @@ public class Spawner : ObjectPool
                     _elapsedTime = 0;
                     SetEnemy(enemy, _spawnPoints[spawnPointIndex].position);
                 }
-            }            
-        }
-    }
+            }
 
-    private void SetEnemy(GameObject enemy,Vector3 spawnpoint)
-    {
-        enemy.SetActive(true);
-        enemy.transform.position = spawnpoint;
+            yield return delay;
+        }
     }
 }

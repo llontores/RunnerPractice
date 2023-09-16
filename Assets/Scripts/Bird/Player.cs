@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private int _health;
 
-    public UnityAction<int> HealthChanged;
+    public event UnityAction<int> HealthChanged;
 
     private void Awake()
     {

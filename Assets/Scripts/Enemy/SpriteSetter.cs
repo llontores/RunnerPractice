@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetSprite : MonoBehaviour
+public class SpriteSetter : MonoBehaviour
 {
     [SerializeField] private Sprite[] _texture;
 
